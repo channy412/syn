@@ -708,6 +708,7 @@ mod printing {
     }
 }
 
+#[cfg(feature = "parsing")]
 pub(crate) fn disallow_prefix_binop(input: crate::parse::ParseStream) -> crate::parse::Result<()> {
     // Be conservative with &&& and ||| so we don't run into any ambiguities.
     // We could try to allow (&&&...) and (|||...), but (...) can also be used for tuples,
@@ -722,6 +723,7 @@ pub(crate) fn disallow_prefix_binop(input: crate::parse::ParseStream) -> crate::
 }
 
 #[cfg(feature = "full")]
+#[cfg(feature = "parsing")]
 pub(crate) fn parse_prefix_binop(
     input: crate::parse::ParseStream,
     attrs: &Vec<Attribute>,
