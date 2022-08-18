@@ -447,6 +447,13 @@ pub mod parsing {
                     let content;
                     let paren_token = parenthesized!(content in input);
                     let id = content.parse()?;
+
+                    let prover_name = &format!("{}", id);
+                    if *prover_name == "bit_vector".to_string() {
+                        dbg!("bv mode");
+                        dbg!(&expr); // linear search for token here?
+                        return Err(input.error("In bit-vector assertion, use `add` `sub` `mul` `div` instead of `+` `-` `*` `/`, "));
+                    }
                     Some((paren_token, id))
                 } else {
                     None
